@@ -21,6 +21,7 @@ package: Custom
 
 type: module
 core: 8.x
+core_version_requirement: ^8 || ^9
  ```
 * .routing.yml
 > Containes custom routing refear to controller callback function
