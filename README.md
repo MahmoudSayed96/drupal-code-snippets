@@ -44,3 +44,17 @@ hello_world.my_page:
 <p>This describes the page and title callbacks. @todo: Where can these defaults be overridden?</p>
 <strong>requirements</strong><br>
 <p>This specifies the conditions under which the page will be displayed. You can specify permissions, modules that must be enabled, and other conditions.</p>
+
+--------------
+[**URL generation**](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/class/Url/8.2.x).
+> When adding a URL into a string, for instance in a text description, core recommends we use the `\Drupal\Core\Url` class. 
+> This has a few handy methods:
+- Internal URL based on a route - **`Url::fromRoute()`**, Example: `Url::fromRoute('acquia_connector.settings')`
+- Internal URL based on a path - **`Url::fromInternalUri()`**, Example: `Url::fromInternalUri('node/add')`
+- External URL - **`Url::fromUri`**, Example: `Url::fromUri('https://www.acquia.com')`
+> When you need to constrict and display the link as text you can use the `toString()` method: `Url::fromRoute('acquia_connector.settings')->toString()`.
+
+**Show Image Field In Twig**
+```php
+{{ content.field_my_image_field|render|striptags('<img>')|trim }}
+```
