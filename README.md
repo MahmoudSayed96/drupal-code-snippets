@@ -58,3 +58,149 @@ hello_world.my_page:
 ```php
 {{ content.field_my_image_field|render|striptags('<img>')|trim }}
 ```
+
+**Drupal 8 Js, how to create a global Drupal Js function**
+```javascript
+/**
+ * Attaches the single_datetime behavior.
+ *
+ * @type {Drupal~behavior}
+ */
+(function ($, Drupal, drupalSettings) {
+  'use strict';
+  Drupal.behaviors.leafletCurrentLocation = {
+    attach: function (context,drupalSettings) {
+    // Code....
+    }
+  }
+})(jQuery, Drupal, drupalSettings);
+```
+**Drupal 8^ Current User Object, useful methods and what they return**
+```php
+get current user in drupal 8
+
+$current_user = \Drupal::currentUser();
+
+$uid = $current_user->id();
+// It returns user id of current user.
+
+$user_mail = $current_user->getEmail();
+// It returns user email id.
+
+$user_display_name = $current_user->getDisplayName();
+// It returns user display name.
+
+$user_account_name = $current_user->getAccountName()
+// It returns user account name.
+
+$user_roles = $current_user->getRoles();
+// It returns array of current user has.
+
+$current_user->isAnonymous();
+// It returns true or false.
+
+$current_user->isAuthenticated();
+// It returns true or false.
+
+$current_user->getLastAccessedTime();
+// It returns timestamp of last logged in time for this user
+```
+[**Drupal 8^: How to inject a Service into a Class (Controller, Form, Plugin Block, etc) and why not into another service Class**](https://pixelthis.gr/content/drupal-8-how-inject-service-class-controller-form-plugin-block-etc-and-why-not-another)
+# Inject a Service in Drupal 8
+
+Is a good practice to inject a service whenever is possible.
+
+## You can verify the service name by:
+
+### Looking at the `Drupal` Static Service Container wrapper class.
+Reading the code on the `Drupal` Class you can find the `httpClient` method:
+```
+  /**
+   * Returns the default http client.
+   *
+   * @return \GuzzleHttp\Client
+   *   A guzzle http client instance.
+   */
+  public static function httpClient() {
+    return static::getContainer()->get('http_client');
+  }
+```
+> Drupal class => https://api.drupal.org/api/drupal/core%21lib%21Drupal.php/class/Drupal/8
+
+### Taking advanage of Drupal Console debugging capabilities 
+```
+$ drupal container:debug 
+```
+If you do not want to see the full list of services you can use `| grep http`
+```
+$ drupal container:debug | grep http
+```
+But you may do not know the service name, then I higly recommend you to use peco interactive filtering tool
+```
+$ drupal container:debug | peco | awk -F ' ' '{print $1}' | xargs drupal container:debug
+```
+You can find peco at https://github.com/peco/peco
+
+## Inject the service
+Now that you know the service name `http_client` 
+
+### Inject into a Class (Controller, Form, Plugin Block, etc)
+```
+ /**
+   * Guzzle Http Client.
+   *
+   * @var GuzzleHttp\Client
+   */
+  protected $httpClient;
+
+ /**
+   * Constructs a new Class.
+   *
+   * @param \GuzzleHttp\Client $http_client
+   *   The http_client.
+   */
+  public function __construct(
+    Client $http_client
+  ) {
+    $this->httpClient = $http_client;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('http_client')
+    );
+  }
+```
+### Inject a service into a service Class
+```
+// modules/custom/example/example.services.yml
+services:
+  example.default:
+    class: Drupal\example\DefaultService
+    arguments: ["@http_client"]
+
+// modules/custom/example/src/DefaultService.php
+ /**
+   * GuzzleHttp\Client definition.
+   *
+   * @var GuzzleHttp\Client
+   */
+  protected $http_client;
+  /**
+   * Constructor.
+   */
+  public function __construct(Client $http_client) {
+    $this->http_client = $http_client;
+  }
+```
+**Drop custom table from database**.
+```php
+function hook_uninstall(){
+    $table = 'your_table_name';
+    $schema = Database::getConnection()->schema();
+    $schema->dropTable($table);
+}
+```
