@@ -301,3 +301,11 @@ $user = \Drupal::currentUser()->getRoles();
   	unset($form['account']);
   }
 ```
+**Drupal 8 programmatically block and unblock a user**
+```php
+/** @var \Drupal\user\UserInterface $user */
+$user = \Drupal\user\Entity\User::load(USER_ID_HERE);
+$user->block();
+// $user->activate();
+$user->save();
+```
