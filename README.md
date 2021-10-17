@@ -294,3 +294,10 @@ function mymodule_node_update(EntityInterface $entity) {
   $bar_value_4 = $entity->get('field_bar')->getValue();
 }
 ```
+**Check if current user is admin**.
+```php
+$user = \Drupal::currentUser()->getRoles();
+  if(!in_array("administrator", $user) && $form_id == 'user_form') {
+  	unset($form['account']);
+  }
+```
