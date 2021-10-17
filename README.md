@@ -204,3 +204,93 @@ function hook_uninstall(){
     $schema->dropTable($table);
 }
 ```
+**Get decrypted field values during entity insert/update hook**
+> The following explains the situation on a `foo` node when attempting to get the value of the text field  
+> `field_bar` during a form-alter, a node pre-save, a node insert, and a node update:
+```php
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * Alter the edit Foo node form.
+ */
+function mymodule_form_node_foo_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\node\Entity\Node $foo_node */
+  $foo_node = $form_state->getFormObject()->getEntity();
+  // Value 1 is correct.
+  $bar_value_1 = $foo_node->field_bar->getString();
+  // Value 2 is correct.
+  $bar_value_2 = $foo_node->field_bar->getValue();
+  // Value 3 is correct.
+  $bar_value_3 = $foo_node->field_bar[0]->value;
+  // Value 4 is correct.
+  $bar_value_4 = $foo_node->get('field_bar')->getValue();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function mymodule_node_presave(EntityInterface $entity) {
+  // Value 1 is correct.
+  $bar_value_1 = $entity->field_bar->getString();
+  // Value 2 is correct.
+  $bar_value_2 = $entity->field_bar->getValue();
+  // Value 3 is correct.
+  $bar_value_3 = $entity->field_bar[0]->value;
+  // Value 4 is correct.
+  $bar_value_4 = $entity->get('field_bar')->getValue();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function mymodule_node_insert(EntityInterface $entity) {
+  // Value 1 returns `[ENCRYPTED]`.
+  $bar_value_1 = $entity->field_bar->getString();
+  // Value 2 returns `[ENCRYPTED]`.
+  $bar_value_2 = $entity->field_bar->getValue();
+  // Value 3 returns `[ENCRYPTED]`.
+  $bar_value_3 = $entity->field_bar[0]->value;
+  // Value 4 returns `[ENCRYPTED]`.
+  $bar_value_4 = $entity->get('field_bar')->getValue();
+
+  /* @var $field_encrypt_process_entities \Drupal\field_encrypt\FieldEncryptProcessEntities */
+  $field_encrypt_process_entities = \Drupal::service('field_encrypt.process_entities');
+  $field_encrypt_process_entities->decryptEntity($entity);
+
+  // Value is STILL `[ENCRYPTED]`.
+  $bar_value_1 = $entity->field_bar->getString();
+  // Value is STILL `[ENCRYPTED]`.
+  $bar_value_2 = $entity->field_bar->getValue();
+  // Value is STILL `[ENCRYPTED]`.
+  $bar_value_3 = $entity->field_bar[0]->value;
+  // Value is STILL `[ENCRYPTED]`.
+  $bar_value_4 = $entity->get('field_bar')->getValue();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function mymodule_node_update(EntityInterface $entity) {
+  // Value 1 returns `[ENCRYPTED]`.
+  $bar_value_1 = $entity->field_bar->getString();
+  // Value 2 returns `[ENCRYPTED]`.
+  $bar_value_2 = $entity->field_bar->getValue();
+  // Value 3 returns `[ENCRYPTED]`.
+  $bar_value_3 = $entity->field_bar[0]->value;
+  // Value 4 returns `[ENCRYPTED]`.
+  $bar_value_4 = $entity->get('field_bar')->getValue();
+
+  /* @var $field_encrypt_process_entities \Drupal\field_encrypt\FieldEncryptProcessEntities */
+  $field_encrypt_process_entities = \Drupal::service('field_encrypt.process_entities');
+  $field_encrypt_process_entities->decryptEntity($entity);
+
+  // Value is STILL `[ENCRYPTED]`.
+  $bar_value_1 = $entity->field_bar->getString();
+  // Value is STILL `[ENCRYPTED]`.
+  $bar_value_2 = $entity->field_bar->getValue();
+  // Value is STILL `[ENCRYPTED]`.
+  $bar_value_3 = $entity->field_bar[0]->value;
+  // Value is STILL `[ENCRYPTED]`.
+  $bar_value_4 = $entity->get('field_bar')->getValue();
+}
+```
