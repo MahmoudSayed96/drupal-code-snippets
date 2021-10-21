@@ -309,3 +309,21 @@ $user->block();
 // $user->activate();
 $user->save();
 ```
+
+**Code snippet that can be used to Log in user programmatically in Drupal 8**
+```php
+use Drupal\user\Entity\User;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+
+$user = User::create([
+  'name' => $userEmail,
+  'mail' => $userEmail,
+  'pass' => $password,
+  'status' => 1,
+]);
+user_login_finalize($user);
+$user_destination = \Drupal::destination()->get();
+$response = new RedirectResponse($user_destination);
+$response->send();
+```
