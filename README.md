@@ -327,3 +327,23 @@ $user_destination = \Drupal::destination()->get();
 $response = new RedirectResponse($user_destination);
 $response->send();
 ```
+
+**Disable block caching in drupal 8**
+```php
+class MYCUSTOMBLOCK extends BlockBase {
+  /**
+   * {@inheritdoc}
+   */
+    public function build() {
+        return array(
+            '#markup' => ""
+        );
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheMaxAge() {
+        return 0;
+    }
+}
+```
