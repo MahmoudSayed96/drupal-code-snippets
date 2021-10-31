@@ -347,3 +347,26 @@ class MYCUSTOMBLOCK extends BlockBase {
     }
 }
 ```
+**FORM**
+```php
+public function getFormId() { 
+  return 'multistep_form_one'; 
+}
+
+public function bulidForm(array $form, FormStateInterface $form_state) { 
+  $form['name'] = array( '#type' => 'textfield', 'title'=> 'name', ); 
+  return $form; 
+}
+
+public function validateForm(array $form, FormStateInterface $form_state) { 
+  if(!is_numeric($form_state->getValue('name')){
+    $form_state->setErrorByName("Enter only alphabets");
+  } 
+}
+
+public function submitForm(array &$form, FormStateInterface $form_state) {
+  foreach ($form_state->getValues() as $key => $value) { 
+    drupal_set_message($key . ': ' . $value);
+  } 
+}
+```
