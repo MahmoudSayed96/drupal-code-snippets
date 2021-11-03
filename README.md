@@ -370,3 +370,30 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
   } 
 }
 ```
+**Paragraph Module**
+> load the paragraphs content.
+```php
+$node  = \Drupal\node\Entity\Node::load(1);
+$paragraph = $node->field_paragraph->getValue();
+// Loop through the result set.
+foreach ( $paragraph as $element ) {
+  $p = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
+  $text = $p->field_name->getValue();
+}
+```
+**Profile Module**
+```php
+// Load profile by user id and profile type.
+ $profile = \Drupal::entityTypeManager()
+        ->getStorage('profile')
+        ->loadByProperties([
+          'uid' => $doctor_id,
+          'type' => 'doctor_profile',
+        ]);
+ // Get filed data.
+ $hcp_profile = reset($hcp_profiles);
+ $address = $hcp_profile->get('field_user_address')->getValue();
+ //Or
+ $full_name = $profile->field_full_name->value;
+
+```
