@@ -395,5 +395,13 @@ foreach ( $paragraph as $element ) {
  $address = $hcp_profile->get('field_user_address')->getValue();
  //Or
  $full_name = $profile->field_full_name->value;
-
+```
+**Set datetime-local html default value**
+```html
+<div class="form-group">
+<label for="">موعد الاختبار</label>
+<?php $datetime = new DateTime($row['start_date']); ?>
+<input type="datetime-local" class="form-control" name="start_date"
+  value="<?= $datetime->format('Y-m-d\TH:i:s'); ?>" required>
+</div>
 ```
