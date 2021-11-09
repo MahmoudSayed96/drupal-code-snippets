@@ -405,3 +405,42 @@ foreach ( $paragraph as $element ) {
   value="<?= $datetime->format('Y-m-d\TH:i:s'); ?>" required>
 </div>
 ```
+
+**Create node programmatically**
+```php
+Try this Code in MigrateContentController:
+
+<?php
+
+namespace Drupal\migrate_contents\Controller;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\node\Entity\Node;
+
+class MigrateContentController extends ControllerBase {
+
+ function migrateContent() {
+ $updated = 0;
+ $data = array(
+   'type' => 'ip_range', 
+   'title' => '192.168.7.100/24', 
+   'field_ip_range_gw' => '192.168.7.100', 
+   'field_ip_range_hidden' => '', 
+   'field_ip_range_blocked' => '192.168.7.200', 
+   'field_ip_range_access_type' => 'Blocked', 
+   'field_ip_threshold' => '20', 
+   'field_ip_range_sec_zone' => 'C2', 
+   'field_ip_range_vlan_name' => 'Network58', 
+   'field_ip_range_vlan_tag' => '4054', 
+   'field_ip_range_comment' => 'Ip ranges from 192.168.7.100 to 192.168.7.255', 
+ );
+ $node = Node::create($data);
+ $node->save();
+ $updated++;
+
+ return array(
+   '#markup' => $updated,
+ );
+ }
+}
+```
