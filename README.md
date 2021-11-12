@@ -444,3 +444,6 @@ class MigrateContentController extends ControllerBase {
  }
 }
 ```
+## DRUPAL CONSOLE
+**Installing**.
+> composer require drupal/console:~1.0 --prefer-dist --optimize-autoloader --sort-packages
