@@ -447,3 +447,19 @@ class MigrateContentController extends ControllerBase {
 ## DRUPAL CONSOLE
 **Installing**.
 > composer require drupal/console:~1.0 --prefer-dist --optimize-autoloader --sort-packages
+
+** Reset user password using uid**
+```php
+public function restPass()
+  {
+    $user = \Drupal\user\Entity\User::load(85);
+    kint($user);
+    die();
+    $user->setPassword('admin');
+    $user->save();
+    return [
+      '#type' => 'markup',
+      '#markup' => 'Done'
+    ];
+  }
+```
