@@ -566,4 +566,8 @@ class RedirectMiddleware implements HttpKernelInterface {
 
 }
 
+// USING
+$middleware = \Drupal::service('http_middleware.oncotogther_core');
+$response = new RedirectResponse(Url::fromUserInput($url)->toString());
+$middleware->setRedirectResponse($response);
 ```
