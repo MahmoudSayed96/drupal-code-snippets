@@ -473,3 +473,23 @@ $query = \Drupal::entityQuery('node')
     ->condition('field_tags.entity.name', 'cats');
 $nids = $query->execute();
 ```
+** Redirect after login**
+```php
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function MYCUSTOMMODULE_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'MYCUSTOMMODULE_user_login_form_submit';
+}
+
+/**
+ * Custom submit handler for the login form.
+ */
+function MYCUSTOMMODULE_user_login_form_submit($form, FormStateInterface $form_state) {
+  $url = Url::fromRoute('/your/destination/path');
+  $form_state->setRedirectUrl($url);
+}
+```
