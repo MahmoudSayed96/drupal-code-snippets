@@ -463,3 +463,13 @@ public function restPass()
     ];
   }
 ```
+
+**Load node by entityQuery**
+```php
+$query = \Drupal::entityQuery('node')
+    ->condition('status', 1)
+    ->condition('changed', REQUEST_TIME, '<')
+    ->condition('title', 'cat', 'CONTAINS')
+    ->condition('field_tags.entity.name', 'cats');
+$nids = $query->execute();
+```
