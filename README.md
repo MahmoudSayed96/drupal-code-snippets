@@ -495,19 +495,18 @@ function MYCUSTOMMODULE_user_login_form_submit($form, FormStateInterface $form_s
 ```
 ** Middlware for redirect issues**
 ```php
-  $middleware = \Drupal::service('http_middleware.oncotogther_core');
  
 // module.service.yml
 services:
-  http_middleware.oncotogther_core:
-    class: Drupal\oncotogther_core\RedirectMiddleware
+  http_middleware.your_module:
+    class: Drupal\your_module\RedirectMiddleware
     tags:
       - { name: http_middleware}
 
 <?php
 
 // Service class.
-namespace Drupal\oncotogther_core;
+namespace Drupal\your_module;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -567,7 +566,7 @@ class RedirectMiddleware implements HttpKernelInterface {
 }
 
 // USING
-$middleware = \Drupal::service('http_middleware.oncotogther_core');
+$middleware = \Drupal::service('http_middleware.your_module');
 $response = new RedirectResponse(Url::fromUserInput($url)->toString());
 $middleware->setRedirectResponse($response);
 ```
