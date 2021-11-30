@@ -570,3 +570,24 @@ $middleware = \Drupal::service('http_middleware.your_module');
 $response = new RedirectResponse(Url::fromUserInput($url)->toString());
 $middleware->setRedirectResponse($response);
 ```
+**Get all taxonomy terms from node**
+```php
+function hook_preprocess_node(&$variables) {
+
+  //make sure you have Devel module installed, then you can use ksm() to explore variables
+  //ksm($variables['node']);
+
+  if ($variables['node']->hasField('field_permit_city')) {
+    //this will give you the referenced terms on the node as objects
+    $term_objects = $variables['node']->get('field_permit_city')->referencedEntities();
+    $term_labels = [];
+    foreach ($term_objects as $term_object) {
+      print $term_object->id(); //the id of the term
+      print $term_object->label(); //the term title
+      $term_labels[] = $term_object->label(); //build an array of term labels
+    }
+    //send an array of term titles over to the node twig template
+    $variables['my_custom_template_variable'] = $term_labels;
+  }
+}
+```
