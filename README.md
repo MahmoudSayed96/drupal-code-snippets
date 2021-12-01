@@ -599,3 +599,11 @@ drush ev "print_r(array_keys(\Drupal::service('plugin.manager.block')->getDefini
 ```bash
 drush ev "print_r(array_keys(\Drupal::service('plugin.manager.block')->getDefinitions()));" | grep profile
 ```
+**Load nodes by term id**
+```php
+$termIds = [3,56,456];
+ $nodes = \Drupal::entityTypeManager()->getStorage('node')->getQuery()
+ ->latestRevision()
+ ->condition('field_tags', $termIds)
+ ->execute();
+```
