@@ -591,3 +591,11 @@ function hook_preprocess_node(&$variables) {
   }
 }
 ```
+**Ways to find the block ID**
+```bash
+drush ev "print_r(array_keys(\Drupal::service('plugin.manager.block')->getDefinitions()));" 
+```
+> If you know part of the ID, you can search for it by adding grep to the end. For example, I have a block that I know has “profile” in the ID, but I don’t know the full ID. I can find it my using this command:
+```bash
+drush ev "print_r(array_keys(\Drupal::service('plugin.manager.block')->getDefinitions()));" | grep profile
+```
