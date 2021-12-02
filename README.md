@@ -607,3 +607,23 @@ $termIds = [3,56,456];
  ->condition('field_tags', $termIds)
  ->execute();
 ```
+
+**Access views-view-unformatted.html.twig fileds**.
+```twig
+{% if title %}
+	<h3>{{ title }}</h3>
+{% endif %}
+{% for row in rows %}
+	{%
+    set row_classes = [
+      default_row_class ? 'views-row',
+    ]
+  %}
+	<div{{row.attributes.addClass(row_classes)}}>
+		{# {{- row.content -}} #}
+		{{row.content['#row']._entity.title.value}}
+		{{row.content['#row']._entity.field_video_url.value}}
+		{{file_url(row.content['#row']._entity.field_video_thumbnail.entity.uri.value)}}
+	</div>
+{% endfor %}
+```
