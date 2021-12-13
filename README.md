@@ -627,3 +627,14 @@ $termIds = [3,56,456];
 	</div>
 {% endfor %}
 ```
+**Code snippet that can help you to get field values in hook_form_alter in Drupal 8**.
+
+Example of entity reference field:
+```php
+$form['field_name']['widget'][0]['target_id']["#value"]
+```
+PHP
+Example of text field:
+```php
+$form['field_name']['widget']["#value"]
+```
