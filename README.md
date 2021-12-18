@@ -638,3 +638,28 @@ Example of text field:
 ```php
 $form['field_name']['widget']["#value"]
 ```
+** show you how to loop images in Twig and dynamically adding image styles to them in Drupal 8**.
+```twig
+{% for item in content.field_images['#items'] %}
+  {% set image = {
+    '#theme':      'image_style',
+    '#style_name': 'medium',
+    '#uri':        item.entity.uri.value,
+    '#alt':        item.alt,
+    '#width':      item.width,
+    '#height':     item.height
+  } %}
+  {{ image }}
+{% endfor %}
+```
+Short snippet that shows how to get url parameters in drupal 8.
+to get query parameter form the url, you can us the following.
+If you have the url for example `/page?uid=123&num=452`.
+To get all params, use:.
+`$param = \Drupal::request()->query->all();`.
+To get "uid" from the url, use:.
+`$uid = \Drupal::request()->query->get('uid');`.
+
+To get "num" from the url, use:
+
+`$num = \Drupal::request()->query->get('num');`
