@@ -665,3 +665,17 @@ To get "num" from the url, use:
 `$num = \Drupal::request()->query->get('num');`
 **How to use ConfirmFormBase to confirm the action of delete nodes in drupal 8**.
 > https://codimth.com/blog/web/drupal/how-use-confirmformbase-confirm-action-delete-nodes-drupal-8
+
+**Apply Patches with composer in drupal 9**.
+run this command to get the module:.
+`composer require cweagans/composer-patches`
+Add this to your `composer.json` file:
+`
+"extra": {
+    "enable-patching": true,
+    "patches": {
+        ...
+        ... 
+         
+     }
+}`
