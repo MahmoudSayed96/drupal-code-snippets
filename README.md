@@ -668,14 +668,14 @@ To get "num" from the url, use:
 
 **Apply Patches with composer in drupal 9**.
 run this command to get the module:.
-`composer require cweagans/composer-patches`
-Add this to your `composer.json` file:
-`
+`composer require cweagans/composer-patches`.
+Add this to your `composer.json` file:.
+```bash
 "extra": {
     "enable-patching": true,
     "patches": {
         ...
         ... 
-         
      }
-}`
+}
+```
