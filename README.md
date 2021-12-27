@@ -683,3 +683,6 @@ Add this to your `composer.json` file:.
 ```php
 $variables['user_url'] = Url::fromRoute('entity.user.canonical', ['user' => $account->id()])->setAbsolute()->toString();
 ```
+
+**Getting Drupal 8 Field Values in Twig**
+[Article](https://sarahcodes.medium.com/getting-drupal-8-field-values-in-twig-22b80cb609bd)
