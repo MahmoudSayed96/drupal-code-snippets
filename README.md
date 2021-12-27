@@ -679,3 +679,7 @@ Add this to your `composer.json` file:.
      }
 }
 ```
+**Get user url**
+```php
+$variables['user_url'] = Url::fromRoute('entity.user.canonical', ['user' => $account->id()])->setAbsolute()->toString();
+```
