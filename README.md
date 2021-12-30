@@ -56,7 +56,7 @@ hello_world.my_page:
 
 **Show Image Field In Twig**
 ```php
-{{ content.field_my_image_field|render|striptags('<img>')|trim }}
+{{fields.field_my_image_field.content|render|striptags('<img>')|trim|raw}}
 ```
 
 **Drupal 8 Js, how to create a global Drupal Js function**
