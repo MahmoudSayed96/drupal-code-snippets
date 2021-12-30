@@ -686,3 +686,14 @@ $variables['user_url'] = Url::fromRoute('entity.user.canonical', ['user' => $acc
 
 **Getting Drupal 8 Field Values in Twig**
 [Article](https://sarahcodes.medium.com/getting-drupal-8-field-values-in-twig-22b80cb609bd)
+
+**Render view programitcally**
+```php
+ $view = \Drupal\views\Views::getView('geographical_statistics');
+// Execute the view.
+$view->execute();
+$view_result = $view->result;
+foreach ($view_result as $obj){
+// Code...
+}
+```
