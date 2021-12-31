@@ -732,6 +732,7 @@ $query = \Drupal::database()->delete('table_name');
 In Drupal, usually the date field value is saved in the database in UTC timezone format.
 One of our requirements for a project was to show the date in the site's timezone format. 
 So we generated a general function to convert date in UTC timezone to any required timezone and format it.
+Just use the below function to convert date in UTC timzone to a given timezone and the format date using a valid timestamp.
 ```php
 /**
  * Function to get date/time on user's timezone
@@ -756,5 +757,18 @@ function get_date_on_given_timezone($timestamp, $new_timezone, $format = 'd/m/Y 
   }
 }
 ```
-
-Just use the below function to convert date in UTC timzone to a given timezone and the format date using a valid timestamp
+**How to Run a JavaScript Code at Browser Closing Time**
+```js
+(function ($) {
+    Drupal.behaviors.page_load_progress = {
+      attach: function (context, settings) {
+        window.onbeforeunload = close_event_function;
+        function close_event_function() {
+          //Enter your code before run window close;
+          return null;
+        }        
+      }
+    };
+  }(jQuery));
+```
+[How to Add Join in Views Query Alter](https://www.zyxware.com/articles/5725/solved-how-to-add-join-in-views-query-alter)
