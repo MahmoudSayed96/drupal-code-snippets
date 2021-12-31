@@ -697,3 +697,64 @@ foreach ($view_result as $obj){
 // Code...
 }
 ```
+##DATABASE OPERATIONS:
+*Now we can checkout the select, update, and delete operations in Drupal 8. For a field selection use*.
+```php
+$query = \Drupal::database()->select('table_name', 'alias')
+  ->fields('alias', ['field1', field2])
+  ->condition('field3', $condition);
+$results = $query->execute();
+while ($content = $results->fetchAssoc()) {
+  // Operations using $content.
+}
+```
+> For a single field selection we can use `$last_paper_id = $last_paper->fetchField();`
+
+*For update query execution in Drupal 8, we can use*.
+```php
+$table = 'table_name';
+\Drupal::database()->update($table)
+  ->fields(array('field1' => $value1, 'field2' => $value2))
+  ->condition('field3', $condition1)
+  ->condition('field4', $condition2)
+  ->execute();
+```
+*For content deletion.*
+```php
+$query = \Drupal::database()->delete('table_name');
+  $query->condition('field1', $condition1);
+  $query->condition('field2', $condition2);
+  $query->execute();
+```
+> Now checkout other database statements in Drupal 8 from this [Link](https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Database!Connection.php/class/Connection/8.2.x)
+
+**How to Change Date Format from UTC Timezone to Any Required Timezone**
+In Drupal, usually the date field value is saved in the database in UTC timezone format.
+One of our requirements for a project was to show the date in the site's timezone format. 
+So we generated a general function to convert date in UTC timezone to any required timezone and format it.
+```php
+/**
+ * Function to get date/time on user's timezone
+ * @param  int $timestamp
+ *  Timestamp to be converted to date
+ * @param string timezone
+ *  Timezone to which date is to be converted
+ * @param  string $format
+ *  Format to which date to convert
+ * @return string
+ *  Formatted date.
+ */
+function get_date_on_given_timezone($timestamp, $new_timezone, $format = 'd/m/Y H:i:s') {
+  if (!empty($timestamp)) {
+    // Database timezone.
+    $db_timezone = 'UTC';
+    $date_object = new DateObject($timestamp, new DateTimeZone($db_timezone));
+    // Convert from the database time zone to site's time zone.
+    $date_object->setTimezone(new DateTimeZone($new_timezone));
+    $new_date = date_format_date($date_object, 'custom', $format);
+    return $new_date;
+  }
+}
+```
+
+Just use the below function to convert date in UTC timzone to a given timezone and the format date using a valid timestamp
