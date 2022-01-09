@@ -697,8 +697,8 @@ foreach ($view_result as $obj){
 // Code...
 }
 ```
-##DATABASE OPERATIONS:
-*Now we can checkout the select, update, and delete operations in Drupal 8. For a field selection use*.
+## DATABASE OPERATIONS:
+**Now we can checkout the select, update, and delete operations in Drupal 8. For a field selection use**.
 ```php
 $query = \Drupal::database()->select('table_name', 'alias')
   ->fields('alias', ['field1', field2])
@@ -710,7 +710,7 @@ while ($content = $results->fetchAssoc()) {
 ```
 > For a single field selection we can use `$last_paper_id = $last_paper->fetchField();`
 
-*For update query execution in Drupal 8, we can use*.
+**For update query execution in Drupal 8, we can use**.
 ```php
 $table = 'table_name';
 \Drupal::database()->update($table)
@@ -719,7 +719,7 @@ $table = 'table_name';
   ->condition('field4', $condition2)
   ->execute();
 ```
-*For content deletion.*
+**For content deletion.**
 ```php
 $query = \Drupal::database()->delete('table_name');
   $query->condition('field1', $condition1);
