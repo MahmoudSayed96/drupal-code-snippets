@@ -728,6 +728,109 @@ $query = \Drupal::database()->delete('table_name');
 ```
 > Now checkout other database statements in Drupal 8 from this [Link](https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Database!Connection.php/class/Connection/8.2.x)
 
+### Select
+**For retrieving  single value from Table**
+```php
+/**
+ * select table 'node_field_data' from database
+ * select field 'title' fropm table 'node_field_data'
+ * get data for content type = ‘page’
+ * Limit query and only fetch one entry
+ */
+$getSingleValue = \Drupal::database()->select('node_field_data', 'nfd');
+$getSingleValue->addField('nfd', 'title');
+$getSingleValue->condition('nfd.type', 'page'); 
+$getSingleValue->range(0, 1);
+$title = $getSingleValue->execute()->fetchField();
+```
+
+**For retrieving  single row from Table**
+```php
+/**
+ * select table 'node_field_data' from database
+ * select fields ('nid', 'title', 'status' from table 'node_field_data'
+ * get data for content type = ‘page’
+ * Limit query and only fetch one entry
+ */
+$getValues = \Drupal::database()->select('node_field_data', 'nfd');
+$getValues->fields('nfd', ['nid', 'title', 'status']);
+$getValues->condition('nfd.type', 'page');
+$getValues->range(0, 1);
+$singleRow = $getValues->execute()->fetchAssoc();
+```
+**For retrieving  single row from Table using Operator (‘IN’)**
+```php
+/**
+ * select table 'node_field_data' from database
+ * select fields ('nid', 'title', 'status' from table 'node_field_data'
+ * get data for content type IN ‘page’
+ * Limit query and only fetch one entry
+ */
+$getValues = \Drupal::database()->select('node_field_data', 'nfd');
+$getValues->fields('nfd', ['nid', 'title', 'status']);
+$getValues->condition('nfd.type', 'page' , 'IN');
+$getValues->range(0, 1);
+$singleRow = $getValues->execute()->fetchAssoc();
+```
+**With Multiple rows and Table**
+```php
+/**
+ * select table 'node_field_data' from database
+ * select fields ('nid', 'title', 'status' from table 'node_field_data'
+ * INNER join on Table 'users_field_data' and select field 'name' from table
+ * get data for content type IN ‘page’
+ * fetch all data with 'nid' as key for result
+ */
+$content = \Drupal::database()->select('node_field_data', 'nfd');
+$content->fields('nfd', ['nid', 'title', 'status']);
+$content->addField('ufd', 'name');
+$content->join('users_field_data', 'ufd', 'ufd.uid = nfd.uid');
+$content->condition('nfd.type', 'page');
+$contentData = $content->execute()->fetchAllAssoc('nid');
+```
+
+### Update
+**For update single row**
+```php
+/**
+ * Existing table 'node_clinical_trial' has entry 
+ * 'secondary progressive MS' on ID 5
+ * Lets update to 'Multiple Sclerosis' using update 
+ */
+
+$content = \Drupal::database()->update('node_clinical_trial', 'nct');
+$content->fields('nct', ['disease' => 'Multiple Sclerosis']);
+$content->condition('nct.entity_id', 5);
+$content->execute();
+```
+### Delete
+**For delete single row**
+```php
+/**
+ * Existing table 'node_clinical_trial' 
+ * has entry 'diabetes' on ID 6
+ * which is not MS type disease
+ * Lets delete that entry using delete
+ */
+$content = \Drupal::database()->delete('node_clinical_trial', 'nct');
+$content->condition('nct.entity_id', 6);
+$content->execute();
+```
+### Insert
+**For Adding data**
+```php
+/**
+ * Add 'disease' & 'physician' name in Master table
+ * 'node_clinical_trial'
+ * Use insert
+ */
+
+$content = \Drupal::database()->insert('node_clinical_trial');
+$content->fields(['disease', 'physician']);
+$content->values(['Psoriasis','Dr.Holmes']);
+$content->execute();
+```
+
 **How to Change Date Format from UTC Timezone to Any Required Timezone**
 In Drupal, usually the date field value is saved in the database in UTC timezone format.
 One of our requirements for a project was to show the date in the site's timezone format. 
