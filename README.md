@@ -875,3 +875,8 @@ function get_date_on_given_timezone($timestamp, $new_timezone, $format = 'd/m/Y 
   }(jQuery));
 ```
 [How to Add Join in Views Query Alter](https://www.zyxware.com/articles/5725/solved-how-to-add-join-in-views-query-alter)
+
+**Show error messages**
+```php
+$config['system.logging']['error_level'] = 'verbose';
+```
