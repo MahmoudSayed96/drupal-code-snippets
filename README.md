@@ -880,3 +880,10 @@ function get_date_on_given_timezone($timestamp, $new_timezone, $format = 'd/m/Y 
 ```php
 $config['system.logging']['error_level'] = 'verbose';
 ```
+
+**Debug Query**
+```php
+// Debug.
+dump($query->__toString());
+dump($query->sqlQuery->__toString());
+```
