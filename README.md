@@ -887,3 +887,12 @@ $config['system.logging']['error_level'] = 'verbose';
 dump($query->__toString());
 dump($query->sqlQuery->__toString());
 ```
+
+** Get taxonomy term from node using entity refrence**
+```php
+      $term_name = $node
+      ->get('field_subspecialty_category')
+      ->referencedEntities()[0]
+      ->getTranslation($lang)
+      ->label();
+```
