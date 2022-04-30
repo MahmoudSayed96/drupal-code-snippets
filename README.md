@@ -896,3 +896,17 @@ dump($query->sqlQuery->__toString());
       ->getTranslation($lang)
       ->label();
 ```
+
+** JavaScript behavories**
+```javascript
+(function($, Drupal, drupalSettings, once){
+  Drupal.behaviors.mainBehavior = {
+    attach: function(context, drupalSettings) {
+      once('mainBehavior', 'html', context).forEach(function(){
+        console.log(drupalSettings);
+        console.log(context);
+      });
+    }
+  };
+})(jQuery, Drupal,drupalSettings, once);
+```
