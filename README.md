@@ -910,3 +910,22 @@ dump($query->sqlQuery->__toString());
   };
 })(jQuery, Drupal,drupalSettings, once);
 ```
+**DateTime**
+```php
+use Drupal\Core\Datetime\DrupalDateTime;
+
+   //Convert Timestamp to Drupal DateTime
+   $drupalDateTime = DrupalDateTime::createFromTimestamp($row->created);
+
+   print $drupalDateTime->format('r');
+  //Will return "Wed, 13 Oct 2021 17:40:39 +0300"
+
+   print $drupalDateTime->__toString()
+  //Will return 2021-10-13 17:40:39 Europe/Athens
+
+  print $drupalDateTime->format('Y-m-d H:i:s')
+  //Will return "2021-10-13 17:40:39"
+
+  print $drupalDateTime->format('Y-m-d H:i:s P')
+  //Will return "2021-10-13 17:40:39 +03:00"
+```
