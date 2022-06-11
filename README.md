@@ -929,3 +929,10 @@ use Drupal\Core\Datetime\DrupalDateTime;
   print $drupalDateTime->format('Y-m-d H:i:s P')
   //Will return "2021-10-13 17:40:39 +03:00"
 ```
+
+**Show twitter timeline**
+```html
+<a class="twitter-timeline" href="https://twitter.com/{field_twitterhandle}">
+Tweets by {field_name}</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+```
