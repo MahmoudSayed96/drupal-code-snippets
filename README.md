@@ -936,3 +936,8 @@ use Drupal\Core\Datetime\DrupalDateTime;
 Tweets by {field_name}</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 ```
+
+**Generate hshad salat**
+```bash
+drush php:eval "echo \Drupal\Component\Utility\Crypt::randomBytesBase64(55)"
+```
