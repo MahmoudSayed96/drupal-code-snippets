@@ -941,3 +941,21 @@ Tweets by {field_name}</a>
 ```bash
 drush php:eval "echo \Drupal\Component\Utility\Crypt::randomBytesBase64(55)"
 ```
+**Save config**
+```php
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    parent::submitForm($form, $form_state);
+    $config = $this->config(self::CONFIG_SETTINGS);
+    $skip = ["submit", "form_build_id", "form_token", "form_id", "op"];
+    foreach ($form_state->getValues() as $key => $value) {
+      if (!in_array($key, $skip)) {
+        $config->set($key, $value);
+      }
+    }
+    $config->save();
+  }
+
+```
