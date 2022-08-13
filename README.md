@@ -959,3 +959,9 @@ drush php:eval "echo \Drupal\Component\Utility\Crypt::randomBytesBase64(55)"
   }
 
 ```
+
+**Install drupal console**
+```bash
+$composer require drupal/console:~1.0 --prefer-dist --optimize-autoloader --sort-packages --no-update --dev
+$composer update drupal/console
+```
