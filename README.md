@@ -895,6 +895,9 @@ return $render;
 
 ## Views
 
+### How to load a view via ajax without breaking ajax functionality?
+@see https://pixelthis.gr/content/drupal8-how-load-view-ajax-without-breaking-ajax-functionality
+
 ### Render a profile view
 
 ```php
@@ -921,6 +924,9 @@ return $render;
 ```
 
 ## Database
+
+### Entity Query: Get all the node entities between a daterange
+@see https://pixelthis.gr/content/entity-query-get-all-node-entities-between-daterange
 
 ### Drop custom table from database.
 
@@ -1194,6 +1200,22 @@ public function __construct(Client $http_client) {
 
 ## Theme
 
+### How to add html tags (span,div,strong etc) in your Menu Item Title
+@see https://pixelthis.gr/content/drupal-8-how-add-html-tags-spandivstrong-etc-your-menu-item-title
+
+### How to pass the base url to drupalSettings for global access
+```php
+/**
+ * Implements hook_page_attachments_alter().
+ *
+ * @inheritdoc
+ */
+function your_theme_page_attachments_alter(&$page) {
+  global $base_url;
+  $page['#attached']['drupalSettings']['baseURL'] = $base_url;
+}
+```
+
 ### Access views-view-unformatted.html.twig fields.
 
 ```twig
@@ -1340,6 +1362,9 @@ $this->t('You can click this %link' ['%link' => $link->toString()]);
 ```
 
 ## General
+
+### PHP: Get current year seasons, per year not just for the current year
+@see https://pixelthis.gr/content/php-get-current-year-seasons-year-not-just-current-year
 
 > Drupal class => <https://api.drupal.org/api/drupal/core%21lib%21Drupal.php/class/Drupal/8>
 
@@ -1501,4 +1526,7 @@ phpcbf --standard=Drupal dir/file
 ```
 
 ### Setting up a local developent website standard workflow
-[Article](https://pixelthis.gr/content/drupal-8-setting-local-developent-website-standard-workflow)
+@see https://pixelthis.gr/content/drupal-8-setting-local-developent-website-standard-workflow)
+
+### Drupal with Docker
+@see https://medium.com/drupal-stories/drupal-dev-environment-on-docker-3c795f2ac7aa
