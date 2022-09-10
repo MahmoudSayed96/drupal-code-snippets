@@ -1200,6 +1200,9 @@ public function __construct(Client $http_client) {
 
 ## Theme
 
+### Adding suggestions to views and preprocessing them
+@see https://pixelthis.gr/content/drupal-9-adding-suggestions-views-and-preprocessing-them
+
 ### How to add html tags (span,div,strong etc) in your Menu Item Title
 @see https://pixelthis.gr/content/drupal-8-how-add-html-tags-spandivstrong-etc-your-menu-item-title
 
