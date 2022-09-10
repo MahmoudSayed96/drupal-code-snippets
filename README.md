@@ -1499,3 +1499,6 @@ phpcs --standard=Drupal dir/file
 phpcbf --standard=Drupal dir/file
 ~/Sites/siteName/web ᐅ eslint dir/file.js
 ```
+
+### Setting up a local developent website standard workflow
+[Article](https://pixelthis.gr/content/drupal-8-setting-local-developent-website-standard-workflow)
