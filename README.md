@@ -1366,6 +1366,21 @@ $this->t('You can click this %link' ['%link' => $link->toString()]);
 
 ## General
 
+### Make field unique field
+```php
+use Drupal\Core\Entity\EntityTypeInterface;
+// if you make a field belongs to a node just change $entity_type to 'node'
+function hook_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  // D8 => $entity_type->id()
+  // D9 => $entity->getEntityTypeId()
+  if ($entity_type->id() === 'user') {
+    if (isset($fields['field_user_id'])) {
+      $fields['field_user_id']->addConstraint('UniqueField', ['message' => t('this id is used before with another user')]);
+    }
+  }
+}
+```
+
 ### PHP: Get current year seasons, per year not just for the current year
 @see https://pixelthis.gr/content/php-get-current-year-seasons-year-not-just-current-year
 
