@@ -449,6 +449,10 @@ $variables['user_url'] = Url::fromRoute('entity.user.canonical', ['user' => $acc
 
 ## Node
 
+### Render node body field.
+```php
+$body = \Drupal\Component\Utility\Unicode::truncate(preg_replace('/[^\w$\x{0080}-\x{FFFF}]+/u', ' ',strip_tags($node->get('body')->value) ), 200, true, true);
+```
 ### Render a node
 
 On drupal 8 every elements (almost) are an entity, as any entity you can render a node.
