@@ -902,6 +902,9 @@ return $render;
 
 ## Views
 
+### Make custom filter
+@see https://tech.axelerant.com/how-to-use-hookviewsdataalter-in-drupal-8
+
 ### How to load a view via ajax without breaking ajax functionality?
 @see https://pixelthis.gr/content/drupal8-how-load-view-ajax-without-breaking-ajax-functionality
 
