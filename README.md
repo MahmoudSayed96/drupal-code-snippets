@@ -449,6 +449,9 @@ $variables['user_url'] = Url::fromRoute('entity.user.canonical', ['user' => $acc
 
 ## Node
 
+### How to programmatically update an entity reference field
+@see https://stefvanlooveren.me/blog/how-programmatically-update-entity-reference-field-drupal-8
+
 ### Render node body field.
 ```php
 $body = \Drupal\Component\Utility\Unicode::truncate(preg_replace('/[^\w$\x{0080}-\x{FFFF}]+/u', ' ',strip_tags($node->get('body')->value) ), 200, true, true);
