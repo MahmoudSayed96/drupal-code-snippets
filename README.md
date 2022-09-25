@@ -902,6 +902,9 @@ return $render;
 
 ## Views
 
+### Views Tutorials
+@see https://drupal-tools.web.cern.ch/how-to/view-tutorials
+
 ### Make custom filter
 @see https://tech.axelerant.com/how-to-use-hookviewsdataalter-in-drupal-8
 
