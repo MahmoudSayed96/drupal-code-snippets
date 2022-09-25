@@ -935,6 +935,9 @@ return $render;
 
 ## Database
 
+### Work with the database in Drupal
+@see https://drupaloutsourcing.com/blog/work-database-drupal-8
+
 ### Entity Query: Get all the node entities between a daterange
 @see https://pixelthis.gr/content/entity-query-get-all-node-entities-between-daterange
 
