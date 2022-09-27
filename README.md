@@ -1549,6 +1549,12 @@ $ drush cset system.site uuid bfb11978-d1a3-4eda-91fb-45decf134e25
 $ drush ev '\Drupal::entityManager()->getStorage("shortcut_set")->load("default")->delete();'
 ```
 
+### Install `Drupal Console`
+@see https://drupalconsole.com/docs/en/
+```bash
+$ composer require drupal/console:~1.0 --prefer-dist --optimize-autoloader
+$ composer update drupal/console --with-dependencies
+```
 ### Testing
 
 @todo description
