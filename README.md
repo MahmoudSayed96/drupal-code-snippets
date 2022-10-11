@@ -1571,3 +1571,27 @@ phpcbf --standard=Drupal dir/file
 
 ### Drupal with Docker
 @see https://medium.com/drupal-stories/drupal-dev-environment-on-docker-3c795f2ac7aa
+
+### Change breadcrunb
+```php
+/**
+ * Implement hook_system_breadcrumb_alter().
+ *
+ * @param \Drupal\Core\Breadcrumb\Breadcrumb $breadcrumb
+ * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
+ * @param array $context
+ *
+ * @return void
+ */
+function my_module_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
+  if ($breadcrumb !== NULL) {
+    $current_route_name = \Drupal::routeMatch()->getRouteName();
+    $links = $breadcrumb->getLinks();
+    if ($current_route_name === 'entity.user.edit_form') {
+      array_pop($links);
+      $breadcrumb = new \Drupal\Core\Breadcrumb\Breadcrumb();
+      $breadcrumb->setLinks($links);
+    }
+  }
+}
+```
