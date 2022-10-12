@@ -1383,6 +1383,20 @@ $this->t('You can click this %link' ['%link' => $link->toString()]);
 ## General
 [Useful Links](https://github.com/gkapoor121212/drupal9-links)
 
+### Return access not allowed from theme.
+```php
+/**
+ * Implements hook_preprocess_page().
+ */
+function my_theme_preprocess_page(&$variables) {
+  $current_route_name = \Drupal::routeMatch()->getRouteName();
+  $current_user = \Drupal::currentUser();
+      if (!$current_user->hasPermission('permission name')) {
+      throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+    }
+}
+```
+
 ### Make field unique field
 ```php
 use Drupal\Core\Entity\EntityTypeInterface;
