@@ -1319,7 +1319,7 @@ Add this to your `composer.json` file:.
 }
 ```
 
-### Generate hshad salat
+### Generate hshad salat `$settings['hash_salt']`
 
 ```bash
 drush php:eval "echo \Drupal\Component\Utility\Crypt::randomBytesBase64(55)"
