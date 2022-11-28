@@ -82,6 +82,7 @@ hello_world.my_page:
 
 ### URL generation###
 
+@see <https://www.hashbangcode.com/article/drupal-9-programmatically-creating-and-using-urls-and-links>. <br>
 @see <https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Url.php/class/Url/8.2.x>.
 
 > When adding a URL into a string, for instance in a text description, core recommends we use the `\Drupal\Core\Url` class.
