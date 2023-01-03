@@ -105,6 +105,25 @@ To get "num" from the url, use:
 
 `$num = \Drupal::request()->query->get('num');`
 
+### URL in TWIG ###
+```twig
+{# Link to frontpage view. #}
+<a href="{{ path('view.frontpage.page_1') }}">{{ 'View all content'|t }}</a>
+<br>
+{# Link to user entity/profile page. #}
+<a href="{{ path('entity.user.canonical', {'user': user.id}) }}">{{ 'View user profile'|t }}</a>
+<br>
+{# Link to node page. #}
+<a href="{{ path('entity.node.canonical', {'node': node.id}) }}">{{ 'View node page'|t }}</a>
+<br>
+{# Add a destination query parameter. Simple Example #}
+<a href="{{ path('user.login', {}, {'query': {'destination': path('<current>') }}) }}">{{ 'View node page'|t }}</a>.
+<br>
+{# Add a destination query parameter. Advanced Example, registration_form.simple_form is a custom route from a custom module with the name registration_form #}
+{% set redirect_path = path('registration_form.simple_form', {'node': node.id}) %}
+<a href="{{ path('user.register',{},{'query':{'destination': redirect_path }}) }}">{{ 'Register'|t }}</a>
+```
+
 ## Images
 
 ### Render images with image styles
