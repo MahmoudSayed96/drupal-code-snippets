@@ -294,6 +294,15 @@ $file_uri = $media->field_media_file->entity->getFileUri();
   $date = new \Drupal\Core\Datetime\DrupalDateTime(); 
   $date->setTimezone(new \DateTimezone(DateTimeItemInterface::STORAGE_TIMEZONE));
   $string = $date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
+  
+  // Query datetime database (datetime field).
+  $query = \Drupal::entityQuery('node')
+  ->condition('type', 'event')
+  ->condition('status', 1)
+  ->condition('field_event_datetime.value', $query_date, '=')
+  ->sort('title', 'ASC');
+  $nids = $query->execute();
+  $count = count($nids);
 ```
 
 ### Retrive datetime field value from node
