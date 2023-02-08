@@ -287,10 +287,13 @@ $file_uri = $media->field_media_file->entity->getFileUri();
 ### Inserting the value from Datetime field form
 @see https://drupal.stackexchange.com/questions/204103/inserting-the-value-from-datetime-field-form
 ```php
-/** @var \Drupal\Core\Datetime\DrupalDateTime $date */
-$date = new \Drupal\Core\Datetime\DrupalDateTime(); 
-$date->setTimezone(new \DateTimezone(DateTimeItemInterface::STORAGE_TIMEZONE));
-$string = $date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
+  // Get a date string suitable for use with entity query.
+  $date = new DrupalDateTime();
+  // This is a date/time from my local timezone.
+  $date = DrupalDateTime::createFromFormat('d-m-Y: H:i A', '28-12-2021: 10:00 AM');
+  $date = new \Drupal\Core\Datetime\DrupalDateTime(); 
+  $date->setTimezone(new \DateTimezone(DateTimeItemInterface::STORAGE_TIMEZONE));
+  $string = $date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
 ```
 
 ### Retrive datetime field value from node
