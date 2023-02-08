@@ -284,6 +284,27 @@ $file_uri = $media->field_media_file->entity->getFileUri();
 
 ## DateTime
 
+### Inserting the value from Datetime field form
+@see https://drupal.stackexchange.com/questions/204103/inserting-the-value-from-datetime-field-form
+```php
+/** @var \Drupal\Core\Datetime\DrupalDateTime $date */
+$date = new \Drupal\Core\Datetime\DrupalDateTime(); 
+$date->setTimezone(new \DateTimezone(DateTimeItemInterface::STORAGE_TIMEZONE));
+$string = $date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
+```
+
+### Retrive datetime field value from node
+@see https://github.com/selwynpolit/d9book/tree/main/web/modules/custom/date_examples
+
+```php
+$event_node = Node::load(1);
+dump($event_node->field_event_datetime->date->format('m/d/y g:i a', ['timezone'=>'Africa/Cairo']));
+dump($event_node->field_event_datetime->date->format('m/d/y g:i A', ['timezone'=>'Africa/Cairo']));
+dump($event_node->field_event_datetime->date->format('F j, Y', ['timezone'=>'Africa/Cairo']));
+dump($event_node->field_event_datetime->date->format('g:i A', ['timezone'=>'Africa/Cairo']));
+```
+
+
 ### DateTime Object
 
 ```php
