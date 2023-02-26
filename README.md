@@ -731,6 +731,9 @@ $node->field_my_thing->view([
 
 ## Form
 
+Render form in twig template
+@see https://www.developersdocs.com/blog/drupal-8-theming-define-custom-template-file-form
+
 ### Redirect after login
 
 ```php
