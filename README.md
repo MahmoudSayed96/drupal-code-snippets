@@ -21,6 +21,7 @@
   - [Theme](#theme)
   - [Drush](#drush)
   - [Links](#links)
+  - [Twig](#twig)
   - [General](#general)
   - [DRUPAL CONSOLE](#drupal-console)
 
@@ -1434,6 +1435,14 @@ Need to pass the link as a string.
 ```php
 $link = Link::fromTextAndUrl('This is a link', Url::fromRoute('entity.node.canonical', ['node' => 1]));
 $this->t('You can click this %link' ['%link' => $link->toString()]);
+```
+
+## Twig
+Access `views-view-unformated.html.twig` content.
+```html
+{# taxonomy field #}
+{{ row.content['#row']._entity.field_course_categories.entity.name.value }}
+{{ row.content['#row']._entity.field_name[0].value }}
 ```
 
 ## General
