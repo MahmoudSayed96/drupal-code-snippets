@@ -1448,6 +1448,11 @@ Access `views-view-unformated.html.twig` content.
 ## General
 [Useful Links](https://github.com/gkapoor121212/drupal9-links)
 
+### import translation file using drush command
+```bash
+drush locale:import ar sites/default/translation/ar.po --type=customized --override=all -y
+```
+
 ### Return access not allowed from theme.
 ```php
 /**
