@@ -1336,6 +1336,7 @@ catch (Exception $e) {
 
 @see https://www.drupal.org/node/1023440
 
+### EXPORT DATABASE ON LIVE SERVER
 ### Drush, use this command, which will include only the structure and not the contents of the cache tables, and gzip-compress.
 
 ```bash
@@ -1347,6 +1348,20 @@ drush sql:dump --gzip --structure-tables-list="cache,cache_*" --result-file='PAT
 ```bash
 mysqldump -u'USERNAME' -p'PASSWORD' DATABASENAME | gzip > PATH/TO/BACKUPFILE.sql.gz
 ```
+
+### IMPORT DATABASE ON LIVE SERVER
+### If you are using MySQL and have access to the command line, use this command (substituting in your site’s database name, user name, and password; if you made a gzip-compressed backup file, you will also need to uncompress it first):
+
+```bash
+gunzip < PATH/TO/BACKUPFILE.sql.gz | mysql -u'USERNAME' -p'PASSWORD' DATABASENAME
+```
+
+### If you prefer to use Drush, use this command:
+
+```bash
+drush sql:query --file='PATH/TO/BACKUPFILE.sql.gz'
+```
+
 
 ### Unlock bloqued used
 
