@@ -1336,6 +1336,18 @@ catch (Exception $e) {
 
 @see https://www.drupal.org/node/1023440
 
+### Drush, use this command, which will include only the structure and not the contents of the cache tables, and gzip-compress.
+
+```bash
+drush sql:dump --gzip --structure-tables-list="cache,cache_*" --result-file='PATH/TO/BACKUPFILE.sql'
+```
+
+### If you are using MySQL and have access to the command line, use this command after truncating the cache tables (substituting in your site’s database name, user name, and password):
+
+```bash
+mysqldump -u'USERNAME' -p'PASSWORD' DATABASENAME | gzip > PATH/TO/BACKUPFILE.sql.gz
+```
+
 ### Unlock bloqued used
 
 `drush uublk username` to unblock the user
