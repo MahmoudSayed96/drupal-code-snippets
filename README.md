@@ -1470,6 +1470,7 @@ Access `views-view-unformated.html.twig` content.
 {# taxonomy field #}
 {{ row.content['#row']._entity.field_course_categories.entity.name.value }}
 {{ row.content['#row']._entity.field_name[0].value }}
+{{ view.field.field_name.original_value }} {# working for translations #}
 ```
 
 ## General
