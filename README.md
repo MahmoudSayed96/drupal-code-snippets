@@ -1464,6 +1464,11 @@ $link = Link::fromTextAndUrl('This is a link', Url::fromRoute('entity.node.canon
 $this->t('You can click this %link' ['%link' => $link->toString()]);
 ```
 
+### Re-import Installed Module Configuration Using Drush
+```bash
+drush config-import --partial --source=modules/custom/<module_name>/config/install --yes
+```
+
 ## Twig
 Access `views-view-unformated.html.twig` content.
 ```html
