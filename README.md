@@ -998,6 +998,63 @@ return $render;
 ### Work with the database in Drupal
 @see https://drupaloutsourcing.com/blog/work-database-drupal-8
 
+### How do I specify in which database my schema should be created?
+```php
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the d8module module.
+ */
+
+function d8module_schema_otherdb() {
+  $schema['mytable'] = array(
+    'description' => 'My table description',
+    'fields' => array(
+      'myfield' => array(
+        'description' => 'My field description',
+        'type' => 'serial',
+        'size' => 'medium',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ),
+    ),
+    'primary key' => array('myfield'),
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function d8module_install() {
+  \Drupal\Core\Database\Database::setActiveConnection('otherdb');
+  $connection = \Drupal\Core\Database\Database::getConnection();
+
+  $schema = d8module_schema_otherdb();
+  foreach ($schema as $name => $table) {
+    $connection->schema()->createTable($name, $table);
+  }
+
+  \Drupal\Core\Database\Database::setActiveConnection();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function d8module_uninstall() {
+  \Drupal\Core\Database\Database::setActiveConnection('otherdb');
+  $connection = \Drupal\Core\Database\Database::getConnection();
+
+  $schema = d8module_schema_otherdb();
+  foreach ($schema as $name => $table) {
+    $connection->schema()->dropTable($name);
+  }
+
+  \Drupal\Core\Database\Database::setActiveConnection();
+}
+```
+
 ### Entity Query: Get all the node entities between a daterange
 @see https://pixelthis.gr/content/entity-query-get-all-node-entities-between-daterange
 
