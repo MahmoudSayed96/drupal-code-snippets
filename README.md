@@ -1772,3 +1772,10 @@ function my_module_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$
 
 ### Diable cache in local development
 @see https://www.drupal.org/node/2598914
+
+### Disable password experation
+```php
+  $u = \Drupal\user\Entity\User::load(1);
+  $u->set("field_password_expiration", "0");
+  $u->save();
+```
