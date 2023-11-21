@@ -106,6 +106,9 @@ To get "num" from the url, use:
 
 `$num = \Drupal::request()->query->get('num');`
 
+// Remove ar or en from the path.
+```php $path = preg_replace('/\/(ar|en)/', '', $request->getPathInfo()); ```
+    
 ### URL in TWIG ###
 ```twig
 {# Link to frontpage view. #}
