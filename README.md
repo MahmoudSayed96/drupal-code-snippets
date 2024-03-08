@@ -1665,6 +1665,25 @@ $middleware = \Drupal::service('http_middleware.your_module');
 $response = new RedirectResponse(Url::fromUserInput($url)->toString());
 $middleware->setRedirectResponse($response);
 ```
+OR
+```php
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_user_login().
+ */
+function greenacorn_user_login(AccountInterface $account) {
+  $roles = $account->getRoles();
+  // user.reset.login == reset
+  // user.login == login
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name != 'user.reset.login' && in_array('client', $roles)) {
+    $destination = Url::fromUserInput('/my-issues')->toString();
+    \Drupal::service('request_stack')->getCurrentRequest()->query->set('destination', $destination);
+  }
+}
+```
 
 ### Render view programitcally
 
