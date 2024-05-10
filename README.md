@@ -1801,3 +1801,24 @@ function my_module_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$
   $u->set("field_password_expiration", "0");
   $u->save();
 ```
+
+### Replace file after uploaded
+```php
+    try {
+      $values = $form_state->getValues();
+      $files = $values['my_file'];
+      /** @var \Drupal\file\Entity\File $file */
+      $file = File::load($files[0]);
+      // Gets content from file.
+      $file_real_path = \Drupal::service('file_system')->realpath($file->getFileUri());
+      $file_contents = file_get_contents($file_real_path);
+      // Saves new file with fixed name and replaces any existing file.
+      \Drupal::service('file.repository')
+        ->writeData($file_contents, 'private://my_files/import.csv', FileSystemInterface::EXISTS_REPLACE);
+      // Deletes the uploaded file.
+      $file->delete();
+  
+    } catch (\Throwable $e) {
+      \Drupal::messenger()->addError('check logs messages');
+    }
+```
