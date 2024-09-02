@@ -658,20 +658,6 @@ function mymodule_node_update(EntityInterface $entity) {
 }
 ```
 
-### Paragraph Module
-
-> load the paragraphs content.
-
-```php
-$node  = \Drupal\node\Entity\Node::load(1);
-$paragraph = $node->field_paragraph->getValue();
-// Loop through the result set.
-foreach ( $paragraph as $element ) {
-  $p = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
-  $text = $p->field_name->getValue();
-}
-```
-
 ### Create node programmatically
 
 ```php
@@ -1568,6 +1554,35 @@ Access `views-view-unformated.html.twig` content.
 To print out single fields I usually use, `{{ paragraph.field_action.value }}`. I think that should also work for you.
 
 In the case of an entity reference field, you need to use `{{ paragraph.field_action.entity.field.value }}`.
+```
+
+### Paragraph Module
+
+> load the paragraphs content.
+
+```php
+$node  = \Drupal\node\Entity\Node::load(1);
+$paragraph = $node->field_paragraph->getValue();
+// Loop through the result set.
+foreach ( $paragraph as $element ) {
+  $p = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
+  $text = $p->field_name->getValue();
+}
+```
+### Suggestion paragraph
+```php
+  // Paragraphs.
+  if ($hook === 'paragraph' && !empty($variables['elements']['#paragraph'])) {
+    $paragraph = $variables['elements']['#paragraph'];
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node) {
+      $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+      $suggestions[] = 'paragraph__' . $sanitized_view_mode;
+      $suggestions[] = 'paragraph__' . $paragraph->bundle() . '__' . $node->bundle();
+      $suggestions[] = 'paragraph__' . $paragraph->bundle() . '__' . $node->bundle() . '__' . $sanitized_view_mode;
+    }
+  }
 ```
 
 ## General
