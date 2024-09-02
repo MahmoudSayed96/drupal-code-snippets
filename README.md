@@ -22,6 +22,7 @@
   - [Drush](#drush)
   - [Links](#links)
   - [Twig](#twig)
+  - [Paragraphs](#paragraphs)
   - [General](#general)
   - [DRUPAL CONSOLE](#drupal-console)
 
@@ -853,6 +854,26 @@ $term_name = $node
 
 ## Block
 
+### Render Block Programtically.
+```php
+/**
+ * Render block.
+ *
+ * @param string $blockName
+ *   Block machine name.
+ *
+ * @return string|array
+ */
+function yourModule_render_block(string $blockName): string|array {
+  $block = Block::load($blockName);
+  if ($block) {
+    return \Drupal::entityTypeManager()
+      ->getViewBuilder('block')
+      ->view($block);
+  }
+  return '';
+}
+```
 ### Set block class for custom block bundles.
 
 @see https://www.drupal.org/node/2724333
@@ -1536,6 +1557,17 @@ Access `views-view-unformated.html.twig` content.
 {{ row.content['#row']._entity.field_course_categories.entity.name.value }}
 {{ row.content['#row']._entity.field_name[0].value }}
 {{ view.field.field_name.original_value }} {# working for translations #}
+```
+
+## Paragraphs
+
+```twig
+{{ drupal_dump(paragraph) }}
+{{ drupal_dump(paragraph.field_button_style) }}
+{{ drupal_dump(paragraph.field_button_style.value) }}
+To print out single fields I usually use, `{{ paragraph.field_action.value }}`. I think that should also work for you.
+
+In the case of an entity reference field, you need to use `{{ paragraph.field_action.entity.field.value }}`.
 ```
 
 ## General
