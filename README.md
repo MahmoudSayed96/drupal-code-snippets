@@ -1547,6 +1547,16 @@ Access `views-view-unformated.html.twig` content.
 
 ## Paragraphs
 
+### Load paragraph fields values
+```php
+$paragraph = $node->field_paragraph->getValue();
+// Loop through the result set.
+foreach ( $paragraph as $element ) {
+  $p = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
+  $text = $p->field_name->getValue();
+}
+```
+
 ```twig
 {{ drupal_dump(paragraph) }}
 {{ drupal_dump(paragraph.field_button_style) }}
