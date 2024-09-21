@@ -206,19 +206,19 @@ $file_uri = $media->field_media_file->entity->getFileUri();
 
 ### Show Image Field In Twig
 
-- Get image as tag `<img>`
+- Get the image as tag `<img>`
 
 ```twig
 {{fields.field_my_image_field.content|render|striptags('<img>')|trim|raw}}
 ```
 
-- Get image as url
+- Get the image as URL
 
 ```twig
 {{fields.field_my_image_field.content|render|striptags|trim|raw}}
 ```
 
-### show you how to loop images in Twig and dynamically adding image styles to them in Drupal 8.
+### show you how to loop images in Twig and dynamically add image styles to them in Drupal 8.
 
 ```twig
 {% for item in content.field_images['#items'] %}
@@ -393,10 +393,10 @@ function get_date_on_given_timezone($timestamp, $new_timezone, $format = 'd/m/Y 
 
 ## User
 
-### Drupal 8 Current User Object, useful methods and what they return
+### Drupal 8 Current User Object, useful methods, and what they return
 
 ```php
-get current user in drupal 8
+get current user in Drupal 8
 
 $current_user = \Drupal::currentUser();
 
@@ -422,10 +422,10 @@ $current_user->isAuthenticated();
 // It returns true or false.
 
 $current_user->getLastAccessedTime();
-// It returns timestamp of last logged in time for this user
+// It returns the timestamp of the last logged-in time for this user
 ```
 
-### Check if current user is admin.
+### Check if the current user is an admin.
 
 ```php
 $user = \Drupal::currentUser()->getRoles();
@@ -968,6 +968,9 @@ return $render;
 ```
 
 ## Views
+
+### Make a view to render content based on each category
+@see https://drupal.stackexchange.com/questions/98881/how-to-display-multiple-products-under-each-category-in-a-views-grid
 
 ### Views Tutorials
 @see https://drupal-tools.web.cern.ch/how-to/view-tutorials
