@@ -725,6 +725,30 @@ $node->field_my_thing->view([
 Render form in twig template
 @see https://www.developersdocs.com/blog/drupal-8-theming-define-custom-template-file-form
 
+### Add cancel button to form
+```php
+  // Add cancel button to form.
+  $form['actions']['cancel'] = [
+    '#type' => 'submit',
+    '#weight' => 999,
+    '#value' => t('Cancel'),
+    '#submit' => ['redirect_to_action'],
+    '#limit_validation_errors' => [],
+    '#attributes' => [
+      'class' => ['btn-cancel']
+    ]
+  ];
+/**
+ * Cancel form.
+ *
+ * @param array $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function redirect_to_action(array &$form, FormStateInterface $form_state): void {
+  $form_state->setRedirect('<front>');
+}
+```
+
 ### Redirect after login
 
 ```php
