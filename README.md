@@ -1906,3 +1906,43 @@ function my_module_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$
       \Drupal::messenger()->addError('check logs messages');
     }
 ```
+
+
+---------------------------------------------------------
+SITE BUILDING CASES
+---------------------------------------------------------
+1. Create parent terms based on parent id @see (https://www.youtube.com/watch?v=v5s6DPc23cI)
+
+### Step 1: Create a View to Display Nodes with Taxonomy Terms
+Create a View for Content:
+
+Go to Structure > Views > Add view.
+Name your view (e.g., "Node Taxonomy Hierarchy").
+Set Show to Content (since you want to display nodes and their terms).
+Set Filter by content type to limit the view to the relevant content type if needed.
+Set the Display Type:
+
+Choose Unformatted list or Table based on your preference.
+Select Create a Page if you want this view to be accessible via a URL route.
+
+### Step 2: Add Relationships to Include Taxonomy Terms and Their Parents
+Add Relationships for Taxonomy Terms:
+
+Under Advanced, click Add next to Relationships.
+Add Parent Term Relationships:
+Click Add again under Relationships and choose Taxonomy term: Parent term.
+Select the parent relationship for the taxonomy term.
+Apply the relationship.
+Configure the contextual filter:
+When the filter value is NOT available: Set this to "Provide default value" > Term ID from URL.
+
+### Step 3: Add Fields to Display the Terms and Their Parent Terms
+Add Fields for Each Level of Terms:
+### Step 4: Configure Display and Path (Optional)
+Set a Path for the View:
+If you created a page display, set a URL path in Page settings > Path (e.g., /node-terms-hierarchy).
+Customize the Sorting and Filters (Optional):
+Add any sorting or filtering options you need. For example, filter by a specific taxonomy vocabulary if your content type uses multiple vocabularies.
+### Step 5: Save and Test the View
+Save your view, and test it by visiting the path you configured.
+The view should display each node with the associated taxonomy term hierarchy, showing direct terms and all levels of parents.
