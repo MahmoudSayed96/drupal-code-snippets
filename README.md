@@ -811,6 +811,12 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 
 ## Taxonomy
 
+### How to filter for the top level of a taxonomy in view
+@see (https://www.drupal.org/forum/support/post-installation/2010-07-22/how-to-filter-for-the-top-level-of-a-taxonomy-in-view)
+
+1. Filter > Parent term >is equal to
+2. Leave it blank.
+
 ### Get entity reference field (taxonomy) value
 
 ```php
