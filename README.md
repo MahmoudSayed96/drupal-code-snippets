@@ -1952,3 +1952,14 @@ Add any sorting or filtering options you need. For example, filter by a specific
 ### Step 5: Save and Test the View
 Save your view, and test it by visiting the path you configured.
 The view should display each node with the associated taxonomy term hierarchy, showing direct terms and all levels of parents.
+
+
+## FIX ISSUES
+
+### Fixing issues releated to `temporary://` and `private://` files
+> Error saving OAuth token file.The specified file 'temporary://filezZvBgU' could not be moved to 'private://.apigee_edge/oauth.dat'.
+
+*Soluation*
+1. Create  `/tmp` folder in path `sites/default/tmp` and update settings.php file `$settings['file_temp_path'] = 'sites/default/tmp';`
+2. Create `/private` folder in path `sites/default/private` and update settings.php file `$settings['file_private_path'] = $app_root . '/sites/default/private';`
+3. Change folders owner on server `sudo chowm -R user:group sites/default/private` & `sudo chowm -R user:group sites/default/tmp`
