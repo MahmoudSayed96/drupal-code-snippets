@@ -1962,4 +1962,5 @@ The view should display each node with the associated taxonomy term hierarchy, s
 *Soluation*
 1. Create  `/tmp` folder in path `sites/default/tmp` and update settings.php file `$settings['file_temp_path'] = 'sites/default/tmp';`
 2. Create `/private` folder in path `sites/default/private` and update settings.php file `$settings['file_private_path'] = $app_root . '/sites/default/private';`
-3. Change folders owner on server `sudo chowm -R user:group sites/default/private` & `sudo chowm -R user:group sites/default/tmp`
+3. Change folders owner on server `sudo chown -R user:group sites/default/private` & `sudo chown -R user:group sites/default/tmp` & `sudo chown -R user:group web/sites/default/files` & `
+chmod -R 775 web/sites/default/files`
